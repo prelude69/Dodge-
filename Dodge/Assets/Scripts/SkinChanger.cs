@@ -92,7 +92,7 @@ public class SkinChanger : MonoBehaviour
         }
     }
     public void ChangeSkin(){
-        PlayerPrefs.SetInt("PlayerSkinIdx", 6);
+        //PlayerPrefs.SetInt("PlayerSkinIdx", 6);
         skinIdx = PlayerPrefs.GetInt("PlayerSkinIdx");
         gameObject.GetComponent<MeshRenderer>().material = skinMat[skinIdx];
     }

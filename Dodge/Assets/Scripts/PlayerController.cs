@@ -32,16 +32,16 @@ public class PlayerController : MonoBehaviour {
         playerRigidbody.velocity = newVelocity;
     }
 
-    void OnTriggerEnter(Collider other) {
-        Vector3 pos = gameObject.transform.position;
+    // void OnTriggerEnter(Collider other) {
+    //     Vector3 pos = gameObject.transform.position;
 
-        if (PlayerPrefs.GetInt("PlayerSkinIdx") == 6 && other.tag == "WallX"){
-            transform.position = new Vector3(1 - pos.x , 1f, pos.z);
-        }
-        else if(PlayerPrefs.GetInt("PlayerSkinIdx") == 6 && other.tag == "WallZ"){
-            transform.position = new Vector3(pos.x, 1f, 1 - pos.z);
-        }
-    }
+    //     if (PlayerPrefs.GetInt("PlayerSkinIdx") == 6 && other.tag == "WallX"){
+    //         transform.position = new Vector3(1 - pos.x , 1f, pos.z);
+    //     }
+    //     else if(PlayerPrefs.GetInt("PlayerSkinIdx") == 6 && other.tag == "WallZ"){
+    //         transform.position = new Vector3(pos.x, 1f, 1 - pos.z);
+    //     }
+    // }
 
     public void Revive(){
         gameObject.SetActive(true);
