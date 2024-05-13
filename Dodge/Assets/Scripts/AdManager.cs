@@ -14,6 +14,8 @@ public class AdManager : MonoBehaviour
 
     private int coin;
     //private bool adOn = false;
+    
+    public const int coinPerSec = 1;
 
     public void AdCall(){
         adPanel.SetActive(true);
@@ -30,7 +32,12 @@ public class AdManager : MonoBehaviour
         //adOn = false;
     }
     public void CoinReward(){
-        coin += 10;
+        coin += coinPerSec * 20;
+        PlayerPrefs.SetInt("Coin", coin);
+    }
+    public void CoinRewardTime(){
+        float time = PlayerPrefs.GetFloat("CoinTime");
+        coin += (int)(time * coinPerSec);
         PlayerPrefs.SetInt("Coin", coin);
     }
 

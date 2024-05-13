@@ -8,4 +8,28 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/TitleScreen.unity
+    guid: 4117464440ca3b84190a090061a43cca
+  - enabled: 1
+    path: Assets/Scenes/LeaderBorad.unity
+    guid: 03ac43b3e7315854281562ed87508b9f
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: bfcdefd8f35b14747b4b26f9f37559ad
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: 70936ef80406a254dbbdbeda815e92b2
+  - enabled: 1
+    path: Assets/Scenes/Level3.unity
+    guid: 3351b8d8c40c403489f91295382d6a4b
+  - enabled: 1
+    path: Assets/Scenes/Level4.unity
+    guid: 81e6c14aa667d17419461e1e7260e1d4
+  - enabled: 1
+    path: Assets/Scenes/LevelInfinity.unity
+    guid: bdc84a2813e574547a748641f286f05e
+  - enabled: 1
+    path: Assets/Scenes/SkinSelect.unity
+    guid: 32ba93ffbb51cff4390a868caeb30764
   m_configObjects: {}

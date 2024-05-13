@@ -11,7 +11,7 @@ public class SkinChanger : MonoBehaviour
 
     public Material[] skinMat = new Material[8];
     public int skinIdx = 0;
-    public int[] skinCost = new int[8]{0, 10, 25, 50, 50, 75, 75, 100};
+    public int[] skinCost = new int[8]{0, 10, 25, 50, 75, 100, 125, 111};
 
     private void SelOrUnlock(int idx){
         switch(idx){
@@ -69,26 +69,26 @@ public class SkinChanger : MonoBehaviour
                     unlockButton.SetActive(true);
                 }
                 break;
-            case 6 :
-                if(PlayerPrefs.GetInt("Mat6Unlock") == 1){
-                    selectButton.SetActive(true);
-                    unlockButton.SetActive(false);
-                }
-                else{
-                    selectButton.SetActive(false);
-                    unlockButton.SetActive(true);
-                }
-                break;
-            case 7 :
-                if(PlayerPrefs.GetInt("Mat7Unlock") == 1){
-                    selectButton.SetActive(true);
-                    unlockButton.SetActive(false);
-                }
-                else{
-                    selectButton.SetActive(false);
-                    unlockButton.SetActive(true);
-                }
-                break;
+            // case 6 :
+            //     if(PlayerPrefs.GetInt("Mat6Unlock") == 1){
+            //         selectButton.SetActive(true);
+            //         unlockButton.SetActive(false);
+            //     }
+            //     else{
+            //         selectButton.SetActive(false);
+            //         unlockButton.SetActive(true);
+            //     }
+            //     break;
+            // case 7 :
+            //     if(PlayerPrefs.GetInt("Mat7Unlock") == 1){
+            //         selectButton.SetActive(true);
+            //         unlockButton.SetActive(false);
+            //     }
+            //     else{
+            //         selectButton.SetActive(false);
+            //         unlockButton.SetActive(true);
+            //     }
+            //     break;
         }
     }
     public void ChangeSkin(){
@@ -97,12 +97,12 @@ public class SkinChanger : MonoBehaviour
         gameObject.GetComponent<MeshRenderer>().material = skinMat[skinIdx];
     }
     public void NextSkin(){
-        skinIdx = ++skinIdx % 8;
+        skinIdx = ++skinIdx % 6;
         gameObject.GetComponent<MeshRenderer>().material = skinMat[skinIdx];
         SelOrUnlock(skinIdx);
     }
     public void PrevSkin(){
-        skinIdx = (skinIdx + 7) % 8;
+        skinIdx = (skinIdx + 5) % 6;
         gameObject.GetComponent<MeshRenderer>().material = skinMat[skinIdx];
         SelOrUnlock(skinIdx);
     }
@@ -114,6 +114,7 @@ public class SkinChanger : MonoBehaviour
         int unlockCondition = PlayerPrefs.GetInt("skin1");
         if(curCoin >= skinCost[skinIdx]){
             curCoin -= skinCost[skinIdx];
+            PlayerPrefs.SetInt("Coin", curCoin);
             switch(skinIdx){
                 case 0 :
                     PlayerPrefs.SetInt("Mat0Unlock", 1);
@@ -133,12 +134,12 @@ public class SkinChanger : MonoBehaviour
                 case 5 :
                     PlayerPrefs.SetInt("Mat5Unlock", 1);
                     break;
-                case 6 :
-                    PlayerPrefs.SetInt("Mat6Unlock", 1);
-                    break;
-                case 7 :
-                    PlayerPrefs.SetInt("Mat7Unlock", 1);
-                    break;
+                // case 6 :
+                //     PlayerPrefs.SetInt("Mat6Unlock", 1);
+                //     break;
+                // case 7 :
+                //     PlayerPrefs.SetInt("Mat7Unlock", 1);
+                //     break;
             }
         }
         SelOrUnlock(skinIdx);
@@ -147,29 +148,29 @@ public class SkinChanger : MonoBehaviour
     void ShowSkinEffect(){
         switch(skinIdx){
             case 0:
-                skinEffectText.text = "A Good Plain Blue\nCost : 0\nThis skin does Literally NOTHING.";
+                skinEffectText.text = "A Good Plain Blue\nCost : " + (int)skinCost[skinIdx] + "\nThis skin does Literally NOTHING.";
                 break;
             case 1:
-                skinEffectText.text = "You Feal Swifter!\nCost : 10\nThis skin increases your skin a little bit.";
+                skinEffectText.text = "You Feal Swifter!\nCost : " + (int)skinCost[skinIdx] + "\nThis skin increases your skin a little bit.";
                 break;
             case 2:
-                skinEffectText.text = "I Am Neo\nCost : 25\nThis sking gives you ability to make all bullet slower.";
+                skinEffectText.text = "I Am Neo\nCost : " + (int)skinCost[skinIdx] + "\nThis sking gives you ability to make all bullet slower.";
                 break;
             case 3:
-                skinEffectText.text = "Tekkai!\nCost : 50\nThis skin gives you ability to be invincible for a short time.";
+                skinEffectText.text = "Tekkai!\nCost : " + (int)skinCost[skinIdx] + "\nThis skin gives you ability to be invincible for a short time.";
                 break;
             case 4:
-                skinEffectText.text = "I'm Alive!\nCost : 50\nThis skin gives you second chance.";
+                skinEffectText.text = "I'm Alive!\nCost : " + (int)skinCost[skinIdx] + "\nThis skin gives you second chance.";
                 break;
             case 5:
-                skinEffectText.text = "EMP!\nCost : 75\nThis skin give you abilty to erase EVERY bullet on field.";
+                skinEffectText.text = "EMP!\nCost : " + (int)skinCost[skinIdx] + "\nThis skin give you abilty to erase EVERY bullet on field.";
                 break;
-            case 6:
-                skinEffectText.text = "Beyond The Horizon!\nCost : 75\nThis skin can make ";
-                break;
-            case 7:
-                skinEffectText.text = "Zombie\nCost : 100\nThis skin can give you a chance of being revived.";
-                break;
+            // case 6:
+            //     skinEffectText.text = "Beyond The Horizon!\nCost : 75\nThis skin can make ";
+            //     break;
+            // case 7:
+            //     skinEffectText.text = "Zombie\nCost : 100\nThis skin can give you a chance of being revived.";
+            //     break;
         }
     }
 

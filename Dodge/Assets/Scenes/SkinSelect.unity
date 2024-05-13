@@ -209,7 +209,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1078614774}
         m_TargetAssemblyTypeName: SkinChanger, Assembly-CSharp
-        m_MethodName: SelectSkin
+        m_MethodName: UnlockSkin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
