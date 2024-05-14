@@ -6,13 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour
 {
+    public GameObject yeeObject;
+    AudioSource yee;
     public Button lvl2Button;
     public Button lvl3Button;
     public Button lvl4Button;
     public Button lvl5Button;
+    public Button skinButton;
     // Start is called before the first frame update
     void Start()
     {
+        yeeObject = GameObject.Find("Yee");
+        yee = yeeObject.GetComponent<AudioSource>();
         int lvlOpen1 = PlayerPrefs.GetInt("lvlOpen1");
         int lvlOpen2 = PlayerPrefs.GetInt("lvlOpen2");
         int lvlOpen3 = PlayerPrefs.GetInt("lvlOpen3");
@@ -37,9 +42,11 @@ public class TitleManager : MonoBehaviour
         }
         if(lvlOpen4 == 1){
             lvl5Button.interactable = true;
+            skinButton.interactable = true;
         }
         else{
             lvl5Button.interactable = false;
+            skinButton.interactable = false;
         }
     }
 
@@ -70,9 +77,11 @@ public class TitleManager : MonoBehaviour
         }
         if(lvlOpen4 == 1){
             lvl5Button.interactable = true;
+            skinButton.interactable = true;
         }
         else{
             lvl5Button.interactable = false;
+            skinButton.interactable = false;
         }
     }
 }

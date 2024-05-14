@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
     public PlayerController playerController;
     public AdManager adManager;
     public InputField playerNameInput;
+    public Text countDown;
     public Text timeText; // 생존 시간을 표시할 텍스트 컴포넌트
     public Text recordText; // 최고 기록을 표시할 텍스트 컴포넌트
     public bool skillAble;
@@ -20,12 +21,15 @@ public class GameManager : MonoBehaviour {
     public int levelNo;
 
     private float surviveTime; // 생존 시간
+    private float leftTime;
     private bool isGameover; // 게임 오버 상태
     private string playerName;
     private float timeB4Ad;
     private float skillCounter;
 
     void Start() {
+        PlayerPrefs.SetInt("killBullet" , 0);
+        PlayerPrefs.SetInt("isInvincible", 0);
         Time.timeScale = 1;
         // 생존 시간과 게임 오버 상태를 초기화
         surviveTime = 0;
@@ -55,7 +59,7 @@ public class GameManager : MonoBehaviour {
                 skillCounter = 0.0f;
             }
         }
-        if(skillOn == true){
+        if(skillAble == false){
             if(PlayerPrefs.GetInt("PlayerSkinIdx") == 2){
                 if(skillCounter < 1.5f){
                     Time.timeScale = 0.5f;
@@ -101,6 +105,7 @@ public class GameManager : MonoBehaviour {
                 }
                 else if(skillCounter < 10.0f){
                     PlayerPrefs.SetInt("killBullet" , 0);
+                    skillOn = false;
                     skillCounter += Time.deltaTime;
                 }
                 else{
@@ -114,32 +119,41 @@ public class GameManager : MonoBehaviour {
         {
             // 생존 시간 갱신
             surviveTime += Time.deltaTime;
-            // 갱신한 생존 시간을 timeText 텍스트 컴포넌트를 통해 표시
-            timeText.text = "Time: " + (int) surviveTime;
-            switch(levelNo){
-                case 1 :
-                    if(surviveTime >= 10){
-                        GameClear();
-                    }
-                    break;
-                case 2 :
-                    if(surviveTime >= 15){
-                        GameClear();
-                    }
-                    break;
-                case 3 :
-                    if(surviveTime >= 20){
-                        GameClear();
-                    }
-                    break;
-                case 4 :
-                    if(surviveTime >= 25){
-                        GameClear();
-                    }
-                    break;
+            if(levelNo == 5){
+                leftTime = surviveTime;
             }
-            if(surviveTime >= 30){
-                int difficulty = (int)(surviveTime/30);
+            else{
+                leftTime = 30 - surviveTime;
+                if(leftTime <= 0){
+                    GameClear();
+                }
+            }
+            // 갱신한 생존 시간을 timeText 텍스트 컴포넌트를 통해 표시
+            timeText.text = "Time: " + (int) leftTime;
+            // switch(levelNo){
+            //     case 1 :
+            //         if(surviveTime >= 10){
+            //             GameClear();
+            //         }
+            //         break;
+            //     case 2 :
+            //         if(surviveTime >= 15){
+            //             GameClear();
+            //         }
+            //         break;
+            //     case 3 :
+            //         if(surviveTime >= 20){
+            //             GameClear();
+            //         }
+            //         break;
+            //     case 4 :
+            //         if(surviveTime >= 25){
+            //             GameClear();
+            //         }
+            //         break;
+            // }
+            if(surviveTime >= 10){
+                int difficulty = (int)(surviveTime/5);
                 BulletSpawner bulSpawner = new BulletSpawner();
                 bulSpawner.DifficultySet(difficulty);
             }
@@ -151,6 +165,8 @@ public class GameManager : MonoBehaviour {
                 skillAble = false;
                 skillOn = true;
                 skillCounter = 0.0f;
+                overRecord.SetActive(false);
+                belowRecord.SetActive(false);
                 ContinueGame();
             }
         }
@@ -176,10 +192,22 @@ public class GameManager : MonoBehaviour {
             }
     }
     public void ContinueGame(){
+        gameoverText.SetActive(false);
         timeB4Ad = surviveTime;
+        PlayerPrefs.SetInt("isInvincible", 0);
+        StartCoroutine(CountDown());
+    }
+    IEnumerator CountDown(){
+        yield return new WaitForSecondsRealtime(1.0f);
+            countDown.text = "3";
+        yield return new WaitForSecondsRealtime(1.0f);
+            countDown.text = "2";
+        yield return new WaitForSecondsRealtime(1.0f);
+            countDown.text = "1";
+        yield return new WaitForSecondsRealtime(1.0f);
+            countDown.text = "";
         Time.timeScale = 1;
         isGameover = false;
-        gameoverText.SetActive(false);
         playerController.Revive();
     }
     // 현재 게임을 게임 오버 상태로 변경하는 메서드

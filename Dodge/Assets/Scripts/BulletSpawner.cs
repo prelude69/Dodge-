@@ -6,6 +6,10 @@ public class BulletSpawner : MonoBehaviour {
     public GameObject bulletPrefab; // 생성할 총알의 원본 프리팹
     public float spawnRateMin = 0.5f; // 최소 생성 주기
     public float spawnRateMax = 3f; // 최대 생성 주기
+    private const float spawnMin = 0.5f;
+    private const float spawnMax = 3f;
+    public GameObject popObject;
+    AudioSource pop;
 
     private Transform target; // 발사할 대상
     private float spawnRate; // 생성 주기
@@ -21,6 +25,8 @@ public class BulletSpawner : MonoBehaviour {
     }
 
     void Update() {
+        popObject = GameObject.Find("Pop");
+        pop = popObject.GetComponent<AudioSource>();
         // timeAfterSpawn을 갱신
         timeAfterSpawn += Time.deltaTime;
 
@@ -29,11 +35,11 @@ public class BulletSpawner : MonoBehaviour {
         {
             // 누적된 시간을 리셋
             timeAfterSpawn = 0f;
+            pop.Play();
 
             // bulletPrefab의 복제본을
             // transform.position 위치와 transform.rotation 회전으로 생성
-            GameObject bullet = Instantiate(bulletPrefab,
-                transform.position, transform.rotation);
+            GameObject bullet = Instantiate(bulletPrefab,transform.position, transform.rotation);
             // 생성된 bullet 게임 오브젝트의 정면 방향이 target을 향하도록 회전
             bullet.transform.LookAt(target);
 
@@ -43,6 +49,7 @@ public class BulletSpawner : MonoBehaviour {
     }
 
     public void DifficultySet(int difficulty){
-        spawnRate = Random.Range(spawnRateMin/(float)difficulty, spawnRateMax/(float)difficulty);
+        spawnRateMin = spawnMin/(float)difficulty;
+        spawnRateMax = spawnMax/(float)difficulty;
     }
 }

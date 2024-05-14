@@ -28,7 +28,6 @@
 -define:PLATFORM_ARCH_64
 -define:UNITY_64
 -define:UNITY_INCLUDE_TESTS
--define:UNITY_ANALYTICS
 -define:USE_SEARCH_ENGINE_API
 -define:USE_SEARCH_TABLE
 -define:USE_SEARCH_MODULE
@@ -352,11 +351,10 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.Purchasing.SecurityStub.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.Purchasing.Stores.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
-"Assets/PBS Materials Variety Pack/zzz/MaterialRandomizer.cs"
-"Assets/PBS Materials Variety Pack/zzz/MaterialRandomizerScript.cs"
 "Assets/Scripts/AdManager.cs"
 "Assets/Scripts/Bullet.cs"
 "Assets/Scripts/BulletSpawner.cs"
+"Assets/Scripts/DevTool.cs"
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/LeaderBoardManager.cs"
 "Assets/Scripts/PlayerController.cs"

@@ -36,6 +36,7 @@ public class Bullet : MonoBehaviour {
                 // 상대방 PlayerController 컴포넌트의 Die() 메서드 실행
                 Destroy(gameObject);
                 if(PlayerPrefs.GetInt("isInvincible") == 0){
+                    PlayerPrefs.SetInt("isInvincible", 1);
                     playerController.Die();
                 }
             }

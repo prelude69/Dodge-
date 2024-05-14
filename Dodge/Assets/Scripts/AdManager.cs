@@ -32,7 +32,7 @@ public class AdManager : MonoBehaviour
         //adOn = false;
     }
     public void CoinReward(){
-        coin += coinPerSec * 20;
+        coin += coinPerSec * 30;
         PlayerPrefs.SetInt("Coin", coin);
     }
     public void CoinRewardTime(){
